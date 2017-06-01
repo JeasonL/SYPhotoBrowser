@@ -80,16 +80,6 @@ static const CGFloat SYPhotoBrowserCaptionLabelPadding = 20.0;
     [self updateCationLabelWithCaption:self.caption];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [UIApplication sharedApplication].keyWindow.windowLevel = UIWindowLevelAlert;
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [UIApplication sharedApplication].keyWindow.windowLevel = UIWindowLevelNormal;
-}
-
 - (void)dealloc {
     self.dataSource = nil;
     self.delegate = nil;
