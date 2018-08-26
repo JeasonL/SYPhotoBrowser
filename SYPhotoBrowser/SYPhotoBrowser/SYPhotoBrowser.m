@@ -134,6 +134,7 @@ static const CGFloat SYPhotoBrowserCaptionLabelPadding = 20.0;
     if ([self.photoBrowserDelegate respondsToSelector:@selector(photoBrowser:didLongPressImage:)]) {
         [self.photoBrowserDelegate photoBrowser:self didLongPressImage:notification.object];
     }
+    self.didLongPressImageBlock ? self.didLongPressImageBlock(notification.object) : nil;
 }
 
 #pragma mark - Private method
