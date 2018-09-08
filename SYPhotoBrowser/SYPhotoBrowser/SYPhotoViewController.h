@@ -12,8 +12,9 @@
 
 @interface SYPhotoViewController : UIViewController
 
-@property (nonatomic, strong, readonly) id imageSource;
 @property (nonatomic, assign, readonly) NSUInteger pageIndex;
+@property (nonatomic, strong, readonly) id imageSource;
+@property (nonatomic, strong, readonly) UIImage *loadedImage;
 
 - (instancetype)initWithImageSouce:(id)imageSouce pageIndex:(NSUInteger)pageIndex;
 - (void)resetImageSize;

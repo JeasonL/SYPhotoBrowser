@@ -13,7 +13,6 @@
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIImageView *imageView;
-@property (nonatomic, strong) UIImage *loadedImage;
 @property (nonatomic, strong) DACircularProgressView *progressView;
 
 @property (nonatomic, assign) CGPoint beginTouchPoint;
@@ -148,7 +147,7 @@
 
 - (void)handleLongPressGestureRecognizer:(UILongPressGestureRecognizer *)longPressGestureRecognizer {
     if (longPressGestureRecognizer.state == UIGestureRecognizerStateBegan && self.loadedImage) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:SYPhotoBrowserLongPressNotification object:self.loadedImage];
+        [[NSNotificationCenter defaultCenter] postNotificationName:SYPhotoBrowserLongPressNotification object:@(self.pageIndex)];
     }
 }
 
@@ -249,7 +248,7 @@
                 [self.progressView removeFromSuperview];
                 NSLog(@"error %@", error);
             } else {
-                self.loadedImage = image;
+                _loadedImage = image;
                 [self prepareImageViewToShow];
                 [self.progressView removeFromSuperview];
             }
@@ -294,7 +293,7 @@
         [self downloadImageFromURL:url];
     } else if ([self.imageSource isKindOfClass:[UIImage class]]) {
         //UIImage
-        self.loadedImage = (UIImage *)self.imageSource;
+        _loadedImage = (UIImage *)self.imageSource;
         [self prepareImageViewToShow];
     }
 }

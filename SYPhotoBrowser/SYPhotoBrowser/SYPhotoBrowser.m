@@ -131,10 +131,12 @@ static const CGFloat SYPhotoBrowserCaptionLabelPadding = 20.0;
 }
 
 - (void)handleLongPressNotification:(NSNotification *)notification {
-    if ([self.photoBrowserDelegate respondsToSelector:@selector(photoBrowser:didLongPressImage:)]) {
-        [self.photoBrowserDelegate photoBrowser:self didLongPressImage:notification.object];
+    NSInteger pageIndex = [(NSNumber *)notification.object integerValue];
+    SYPhotoViewController *photoViewController = self.photoViewControllerArray[pageIndex];
+    if ([self.photoBrowserDelegate respondsToSelector:@selector(photoBrowser:didLongPressImage:atPageIndex:)]) {
+        [self.photoBrowserDelegate photoBrowser:self didLongPressImage:photoViewController.loadedImage atPageIndex:pageIndex];
     }
-    self.didLongPressImageBlock ? self.didLongPressImageBlock(notification.object) : nil;
+    self.didLongPressImageBlock ? self.didLongPressImageBlock(self, photoViewController.loadedImage, pageIndex) : nil;
 }
 
 #pragma mark - Private method
@@ -226,6 +228,10 @@ static const CGFloat SYPhotoBrowserCaptionLabelPadding = 20.0;
         [self.view addSubview:_captionLabel];
     }
     return _captionLabel;
+}
+
+- (NSInteger)currentPageIndex {
+    return self.systemPageControl.currentPage;
 }
 
 @end

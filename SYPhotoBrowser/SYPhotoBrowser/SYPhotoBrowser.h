@@ -21,7 +21,7 @@ typedef NS_ENUM(NSUInteger, SYPhotoBrowserPageControlStyle) {
 @protocol SYPhotoBrowserDelegate <NSObject>
 
 @optional
-- (void)photoBrowser:(SYPhotoBrowser *)photoBrowser didLongPressImage:(UIImage *)image;
+- (void)photoBrowser:(SYPhotoBrowser *)photoBrowser didLongPressImage:(UIImage *)image atPageIndex:(NSInteger)pageIndex;
 
 @end
 
@@ -32,7 +32,8 @@ typedef NS_ENUM(NSUInteger, SYPhotoBrowserPageControlStyle) {
 
 @property (nonatomic, assign) NSUInteger initialPageIndex;
 @property (nonatomic, assign) SYPhotoBrowserPageControlStyle pageControlStyle;
-@property (nonatomic, copy) void(^didLongPressImageBlock)(UIImage *image);
+@property (nonatomic, assign, readonly) NSInteger currentPageIndex;
+@property (nonatomic, copy) void(^didLongPressImageBlock)(SYPhotoBrowser *photoBrowser, UIImage *image, NSInteger pageIndex);
 
 
 @end
