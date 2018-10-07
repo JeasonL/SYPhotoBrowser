@@ -8,7 +8,6 @@
 
 #import "SYPhotoBrowser.h"
 #import "SYPhotoBrowserCaptionLabel.h"
-#import "SYPhotoViewController.h"
 
 static const CGFloat SYPhotoBrowserPageControlHeight = 40.0;
 static const CGFloat SYPhotoBrowserCaptionLabelPadding = 20.0;
@@ -232,6 +231,10 @@ static const CGFloat SYPhotoBrowserCaptionLabelPadding = 20.0;
 
 - (NSInteger)currentPageIndex {
     return self.systemPageControl.currentPage;
+}
+
+- (SYPhotoViewController *)currentPhotoViewController {
+    return self.photoViewControllerArray[self.currentPageIndex];
 }
 
 @end
